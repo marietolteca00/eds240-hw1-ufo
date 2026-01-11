@@ -3,6 +3,7 @@ title: "HW #1"
 subtitle: "Interpreting `{ggplot2}` code"
 description: "Assigned Wed 01/07/2026 | Due Wed 01/14/2026"
 author: "Marie Tolteca"
+date: 1/10/2025
 toc: true
 code-line-numbers: true
 editor_options: 
@@ -54,11 +55,11 @@ showtext::showtext_auto(enable = TRUE)
 
 1.  **What is the author defining in lines 15-17? Where else in the code do these defined variables show up? What advantage(s) is there to defining these values here, as variables, rather than defining the values directly throughout the script?**
 
-    -   Answer here
+    -   The author is defining in lines 15-17 the colors of the variable called alien, `bg` is set to the first color/ hex code, and `accent` is assigned to the other color/ hex code. When the plots are being made the variables `bg` and `accent` are used. The advantages of assigning the variables, is that when wanting to use the variables made more efficiently.
 
 2.  **In your own words, explain what the function, `font_add_google()`, does. What's the difference between the two arguments, `name` and `family`?**
 
-    -   Answer here
+    -   Font add google allows us to use the font from Google Font repository. The argument `name` is the name of the font that will be serched in Google Fonts. Whereas `family` specifies the font in R.
 
 ## II. Data wrangling
 
@@ -80,7 +81,7 @@ df_pop <- places |>
 
 3.  **Describe what this data frame contains.**
 
-    -   Answer here
+    -   This dataframe contains the states in the 'US' using the country code column from places. When creating the new column state, `str_replace` was used to keep data formatting consistant with acronyms beings all in upper case. Lastly, it was grouped by state and summarise by the sum of population for each state.
 
 ### ii. Create `df_us`
 
@@ -104,11 +105,11 @@ df_us <- ufo_sightings |>
 
 4.  **Describe what this data frame contains.**
 
-    -   Answer here
+    -   Here we are using the ufo_sighting dataframe, it has been filtered to only grab the areas in country code column. A new column was made, called state and same code was applied as before to have consistency in all uppercase.
 
 5.  **What does `opacity_val` represent, and why is it calculated?**
 
-    -   Answer here
+    -   The `opacity_val` is calculating a percentage number of obeservations and population.
 
 ### iii. Create `df_shape`
 
@@ -132,15 +133,15 @@ df_shape <- ufo_sightings |>
 
 6.  **Describe what this data frame contains.**
 
-    -   Answer here
+    -   In this dataframe we have excluded rows with 'unknown' and 'other' in the shape column. The count line is counting how many times the variable appeared in the shape column. The column 'n' is being renamed into 'total_sightings', it is arranged in a descending order (largest to smallest), sliced at 10, to only see the top 10, and lastly we are creating a shape column that is being facet reordered with shape and total sightings. The other column made is opacity value where it is being rescaled to only include values from 0.3-1. 
 
 7.  **What does `fct_reorder` do when it is applied to the `shape` variable? What would have happened if this step was not performed?**
 
-    -   Answer here
+    -   `fct_reorder` is setting the order of the variables in shape, by default it will order them from lowest to highest or alphabetical. Without `fct_reorder`, the results will not be in a sequential format and when making a visual it will make interpretation more difficult.
 
 8.  **What is the purpose of rescaling `opacity_val`? And why rescale from 0.3 to 1?**
 
-    -   Answer here
+    -   The purpose of rescaling is to have an opacity values from 0.3-1 instead of having outliers it will keep the information close.
 
 ### iv. Create `df_day_hour`
 
@@ -164,15 +165,28 @@ df_day_hour <- ufo_sightings |>
       hour == 12 ~ "12pm",
       TRUE ~ paste0(hour - 12, "pm")) 
     )
+df_day_hour1 <- ufo_sightings |>
+  mutate(
+    day = wday(reported_date_time), 
+    hour = hour(reported_date_time), 
+    wday = wday(reported_date_time, label = TRUE) 
+  ) |>
+  count(day, wday, hour) |>
+  rename(total_daily_obs = n) |> 
+  mutate(
+    opacity_val = total_daily_obs / max(total_daily_obs),
+    hour_lab = case_when(
+      TRUE ~ paste0(hour - 12, "pm")) 
+    )
 ```
 
 9.  **Describe what this data frame contains.**
 
-    -   Answer here
+    -   Columns were created to have specified time stamps (day, hour, workday) using the reported date time column from the ufo sightings. From that a count line was ran to view how many times it events overlapped for the new columns. The count column was renamed to total daily obeservations. More columns are created to get an estimation of 0.0-1, and and hour lab column was made to get an approximation of when events occured during the hour column using statements.
 
 10. **What is the purpose of the last line inside the `case_when()` statement (`TRUE ~ paste0(hour - 12, "pm")`)?**
 
-    -   Answer here
+    -   The purpose of the last line is to get the time past midnight, instead of getting negative numbers it changes into AM time stamps.
 
 ## III. Prepare text elements
 
