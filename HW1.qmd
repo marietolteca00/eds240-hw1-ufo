@@ -208,7 +208,7 @@ caption <- glue("{original}{space}{dan_github}
 
 11. **In your own words, what is the difference between `paste0()` and `glue()`? Why did the author use `paste0` to construct `quotes` and `glue` to construct the other text elements?**
 
-    -   Answer here
+    -   The difference between `paste0` and `glue` is that glue is able to interpolate and format a string, similar to `paste0` but it can be used in more complex areas. `Paste0` concatenates vectors after converting to characters.
 
 ## IV. Build plots
 
@@ -250,14 +250,16 @@ plot_shape <- ggplot(data = df_shape) +
 
 12. **Explain the values provided to the `x` aesthetic for both text geoms (`shape` & `total_sightings`).**
 
-    -   Answer here
+    -   The values provided in the `x` asthetic for both text geoms is to show the variables of the shape column and the total sightings number to be shown on the column plot.
+    
+    
 
 ### ii. Build `plot_us`
 
 **HINT:** Consider temporarily commenting out / rearranging the `geom_*()` layers to better understand how this plot is constructed
 
 ```{r}
-#| eval: false
+#| eval: true
 #| echo: true
 
 plot_us <-  ggplot(df_us) +
@@ -290,7 +292,7 @@ plot_us <-  ggplot(df_us) +
 
 13. **Consider the order of `geom_*()` layers in the the above plot (`plot_us`). Why did the author order the layers in this way?**
 
-    -   Answer here
+    -   In the first geom_rect(), this is making the size of the squares and it is being filled with the opacity values. The following line geom_text() is adding the text into the squares by state along as the type of google font and family. The following line geom_text() is adding the numbers below the state abbreviation, along with the google fonts and family. The author set the layers this way to create a different visualization rather than a plot. The layers had to be set in this format because if they were switched then it would've blocked information. Essentially the way the lines are coded matters.
 
 ### iii. Build `plot_day`
 
@@ -313,7 +315,7 @@ plot_day <- ggplot(data = df_day_hour) +
             color = bg, 
             size = 8) + 
   ylim(-5, 9) +
-  xlim(NA, 23.55) +
+  xlim(NA, 50) +
   coord_polar() +
   theme_void() +
   theme(
@@ -324,11 +326,11 @@ plot_day <- ggplot(data = df_day_hour) +
 
 14. **This plot includes one-letter labels for each day of the week. How is ths accomplished when week days are written using their three-letter abbreviations (e.g. `Mon`, `Tue`) in the `df_day_hour` data frame?**
 
-    -   Answer here
+    -   The labels for each day of the week are being extracted by using str_sub in geom_text, it is only grabbing the first letter instead of the whole word.
 
 15. **What role do the `ylim()` and `xlim()` functions play in shaping a ggplot, and how do they change the visual layout of this particular plot? To better understand their effect, try rerunning the code with each of these lines commented out and observe how the plot’s spacing and composition change.**
 
-    -   Answer here
+    -  When testing different numbers for ylim, i noticed a difference in the way the inner circle of opacity values would be the ones affected. When xlim is changed the times overlap or the circle is not noticable and looks like a half circle with the timestamps overlapping.
 
 ### iv. Build `quote*`s
 
@@ -389,7 +391,7 @@ quote3 <- ggplot() +
 
 16. **Why do you think the author chose to convert these text elements (and also in `plot_ufo`, below!) into ggplot objects (you may consider returning to this question after you've worked your way through all of the code)?**
 
-    -   Answer here
+    -   I believe the author chose to do an annotation instead of a geom text because some elements might be hanlded or plotted differently. In these plots we just got the sentences in text. Versus the o previous plots we were showned the visual differently without sentences they were just a single text.
 
 ### v. Build `plot_ufo`
 

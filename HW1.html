@@ -198,11 +198,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p><strong>What is the author defining in lines 15-17? Where else in the code do these defined variables show up? What advantage(s) is there to defining these values here, as variables, rather than defining the values directly throughout the script?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The author is defining in lines 15-17 the colors of the variable called alien, <code>bg</code> is set to the first color/ hex code, and <code>accent</code> is assigned to the other color/ hex code. When the plots are being made the variables <code>bg</code> and <code>accent</code> are used. The advantages of assigning the variables, is that when wanting to use the variables made more efficiently.</li>
 </ul></li>
 <li><p><strong>In your own words, explain what the function, <code>font_add_google()</code>, does. What’s the difference between the two arguments, <code>name</code> and <code>family</code>?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>Font add google allows us to use the font from Google Font repository. The argument <code>name</code> is the name of the font that will be serched in Google Fonts. Whereas <code>family</code> specifies the font in R.</li>
 </ul></li>
 </ol>
 </section>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="3" type="1">
 <li><p><strong>Describe what this data frame contains.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>This dataframe contains the states in the ‘US’ using the country code column from places. When creating the new column state, <code>str_replace</code> was used to keep data formatting consistant with acronyms beings all in upper case. Lastly, it was grouped by state and summarise by the sum of population for each state.</li>
 </ul></li>
 </ol>
 </section>
@@ -246,11 +246,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li><p><strong>Describe what this data frame contains.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>Here we are using the ufo_sighting dataframe, it has been filtered to only grab the areas in country code column. A new column was made, called state and same code was applied as before to have consistency in all uppercase.</li>
 </ul></li>
 <li><p><strong>What does <code>opacity_val</code> represent, and why is it calculated?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The <code>opacity_val</code> is calculating a percentage number of obeservations and population.</li>
 </ul></li>
 </ol>
 </section>
@@ -273,15 +273,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="6" type="1">
 <li><p><strong>Describe what this data frame contains.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>In this dataframe we have excluded rows with ‘unknown’ and ‘other’ in the shape column. The count line is counting how many times the variable appeared in the shape column. The column ‘n’ is being renamed into ‘total_sightings’, it is arranged in a descending order (largest to smallest), sliced at 10, to only see the top 10, and lastly we are creating a shape column that is being facet reordered with shape and total sightings. The other column made is opacity value where it is being rescaled to only include values from 0.3-1.</li>
 </ul></li>
 <li><p><strong>What does <code>fct_reorder</code> do when it is applied to the <code>shape</code> variable? What would have happened if this step was not performed?</strong></p>
 <ul>
-<li>Answer here</li>
+<li><code>fct_reorder</code> is setting the order of the variables in shape, by default it will order them from lowest to highest or alphabetical. Without <code>fct_reorder</code>, the results will not be in a sequential format and when making a visual it will make interpretation more difficult.</li>
 </ul></li>
 <li><p><strong>What is the purpose of rescaling <code>opacity_val</code>? And why rescale from 0.3 to 1?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The purpose of rescaling is to have an opacity values from 0.3-1 instead of having outliers it will keep the information close.</li>
 </ul></li>
 </ol>
 </section>
@@ -303,16 +303,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-13"><a href="#cb5-13"></a>      hour <span class="sc">&lt;=</span> <span class="dv">12</span> <span class="sc">~</span> <span class="fu">paste0</span>(hour, <span class="st">"am"</span>),</span>
 <span id="cb5-14"><a href="#cb5-14"></a>      hour <span class="sc">==</span> <span class="dv">12</span> <span class="sc">~</span> <span class="st">"12pm"</span>,</span>
 <span id="cb5-15"><a href="#cb5-15"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">paste0</span>(hour <span class="sc">-</span> <span class="dv">12</span>, <span class="st">"pm"</span>)) </span>
-<span id="cb5-16"><a href="#cb5-16"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-16"><a href="#cb5-16"></a>    )</span>
+<span id="cb5-17"><a href="#cb5-17"></a>df_day_hour1 <span class="ot">&lt;-</span> ufo_sightings <span class="sc">|&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-19"><a href="#cb5-19"></a>    <span class="at">day =</span> <span class="fu">wday</span>(reported_date_time), </span>
+<span id="cb5-20"><a href="#cb5-20"></a>    <span class="at">hour =</span> <span class="fu">hour</span>(reported_date_time), </span>
+<span id="cb5-21"><a href="#cb5-21"></a>    <span class="at">wday =</span> <span class="fu">wday</span>(reported_date_time, <span class="at">label =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb5-22"><a href="#cb5-22"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="fu">count</span>(day, wday, hour) <span class="sc">|&gt;</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>  <span class="fu">rename</span>(<span class="at">total_daily_obs =</span> n) <span class="sc">|&gt;</span> </span>
+<span id="cb5-25"><a href="#cb5-25"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-26"><a href="#cb5-26"></a>    <span class="at">opacity_val =</span> total_daily_obs <span class="sc">/</span> <span class="fu">max</span>(total_daily_obs),</span>
+<span id="cb5-27"><a href="#cb5-27"></a>    <span class="at">hour_lab =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-28"><a href="#cb5-28"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">paste0</span>(hour <span class="sc">-</span> <span class="dv">12</span>, <span class="st">"pm"</span>)) </span>
+<span id="cb5-29"><a href="#cb5-29"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="9" type="1">
 <li><p><strong>Describe what this data frame contains.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>Columns were created to have specified time stamps (day, hour, workday) using the reported date time column from the ufo sightings. From that a count line was ran to view how many times it events overlapped for the new columns. The count column was renamed to total daily obeservations. More columns are created to get an estimation of 0.0-1, and and hour lab column was made to get an approximation of when events occured during the hour column using statements.</li>
 </ul></li>
 <li><p><strong>What is the purpose of the last line inside the <code>case_when()</code> statement (<code>TRUE ~ paste0(hour - 12, "pm")</code>)?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The purpose of the last line is to get the time past midnight, instead of getting negative numbers it changes into AM time stamps.</li>
 </ul></li>
 </ol>
 </section>
@@ -334,7 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="11" type="1">
 <li><p><strong>In your own words, what is the difference between <code>paste0()</code> and <code>glue()</code>? Why did the author use <code>paste0</code> to construct <code>quotes</code> and <code>glue</code> to construct the other text elements?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The difference between <code>paste0</code> and <code>glue</code> is that glue is able to interpolate and format a string, similar to <code>paste0</code> but it can be used in more complex areas. <code>Paste0</code> concatenates vectors after converting to characters.</li>
 </ul></li>
 </ol>
 </section>
@@ -375,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="12" type="1">
 <li><p><strong>Explain the values provided to the <code>x</code> aesthetic for both text geoms (<code>shape</code> &amp; <code>total_sightings</code>).</strong></p>
 <ul>
-<li>Answer here</li>
+<li></li>
 </ul></li>
 </ol>
 </section>
