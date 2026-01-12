@@ -446,7 +446,7 @@ plot_base <- ggplot() +
 
 17. **Why does the author render `plot.caption` using `ggtext::element_markdown()`, rather than `element_text()` (like he does for rendering `plot.title` and `text`)?**
 
-    -   Answer here
+    -   There are different uses between plot.caption and element_text, in plot.caption it has more leeway and more paramters to be changed. In element_text, we are limited to its properties. Viewing the plot, using plot.caption, has allowed more leeway and changed the visual rather than just using element_text.
 
 ## V. Assemble & save
 
@@ -477,11 +477,11 @@ ggsave(plot = plot_final,
 
 18. **Explain how `plot_final` is assembled. What do you think is the most challenging aspect of arranging all components into a single plot?**
 
-    -   Answer here
+    -  Using the previous plot made, 'plot_base', as the name specifies what it is, it will be the main template of how the previous plots created are going to be added. The plot is assembled using inset_element(), to add each plot made, that function has to be used. As well as setting the location of the plots or text.
 
 19. **Can you think of one reason the author may have chosen to separate the construction of `plot_base` and `plot_final`?**
 
-    -   Answer here
+    -   I think it can be used as other base plots for any other infographic or visual. This will help not making duplicate text and make ciding more efficient.
 
 ## Answer some final reflective questions
 
@@ -489,7 +489,7 @@ ggsave(plot = plot_final,
 
     a.  **What "perceptual tasks" (from Cleveland & McGill's heirarchy) must the viewer perform to extract information from these visualizations?**
 
-        -   Answer here
+        - They emphasized to construct plots based on elementary tasks "as high in the hierchary as possible". Essentially the perceptual task are to make it as easy as possible to the viewer, make it simple, and easy to understand. A quick glance and they can extract information from it.
 
     b.  **What task(s) do you think the author wanted to enable or message(s) he wanted to convey with these visualizations (see lecture 2.1, slide 16 for examples)? Be sure to note at least one task / message for each of the three data viz.**
 
