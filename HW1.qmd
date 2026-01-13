@@ -493,24 +493,24 @@ ggsave(plot = plot_final,
 
     b.  **What task(s) do you think the author wanted to enable or message(s) he wanted to convey with these visualizations (see lecture 2.1, slide 16 for examples)? Be sure to note at least one task / message for each of the three data viz.**
 
-        -   Answer here
+        - The tasks that the author wanted to convey with the visualizations were too reveal a connection and big picture trends,  between the 10 commonly sighted shapes, 10k sights population with states in the US, and days out of the week with time stamps when observations were noted.
 
     c.  **Name at least one caveat to the "hierarchy of perceptual tasks" that the author employed to achieve a goal(s) you noted in question b?**
 
-        -   Answer here
+        -   One caveat the author employed to achieve his goal was the making of the 10k sighting population in the US states. The reason I chose this one was because it reminded me of a periodic table at first, not a visual that is common when representing data. I thought it was pretty cool to create the visual.
 
 21. **Describe two elements of this piece that you find visually-pleasing / easy to understand / intuitive. Why?**
 
-    -   Answer here
+    -   The two elements would be the bar/ column plot was easy to understand, intuitive, and visually pleasing showing that the lower the bar is the more transparent it gets. Another element that was visually pleasing were the added text using google fonts.
 
 22. **Describe two elements of this piece that you feel could be better presented in a different way. Why?**
 
-    -   Answer here
+    -   Two elements that could be better would be to not make it too transparent which makes some of the plots hard to read. The other element would be for the last plot, make the time stamps less cluttered and more apparent as they are also hard to read.
 
 23. **Describe two new things that you learned by interpreting / annotating this code. These could be packages, functions, or even code organizational approaches that you hadn't previously known about or considered.**
 
-    -   Answer here
+    -   I had to search either on here with the `?` and the function to see what it did or change the code to see what would happen. If the `?` did not have text or very vague I would try google and see what the differences or what the package or function does.
 
 24. **How, if at all, did you use AI tools to help you interpret this code? Describe your approach to using these tools for this assignment. In what ways was consulting the documentation more (or less) helpful than using AI?**
 
-    -   Answer here
+    -   One way that I partially used AI was when I would do google searched, it would give me a table on how functions were different. Other than that I would click the Rstudio package link and it would show something similar to what the `?` would provide
