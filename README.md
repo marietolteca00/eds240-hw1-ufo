@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Homework #1 (Interpreting `{ggplot2}` code)
 ### UFO Sightings by Locations
 
