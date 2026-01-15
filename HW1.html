@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marie Tolteca">
-<meta name="dcterms.date" content="2025-01-10">
+<meta name="dcterms.date" content="2025-01-14">
 <meta name="description" content="Assigned Wed 01/07/2026 | Due Wed 01/14/2026">
 
 <title>HW #1</title>
@@ -135,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2025</p>
+      <p class="date">January 14, 2025</p>
     </div>
   </div>
   
@@ -177,23 +177,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(scales) </span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(showtext) </span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="fu">library</span>(tidyverse) </span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>ufo_sightings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-06-20/ufo_sightings.csv'</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a>places <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-06-20/places.csv'</span>)</span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a>alien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#101319"</span>, <span class="st">"#28ee85"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16"></a>bg <span class="ot">&lt;-</span> alien[<span class="dv">1</span>]</span>
-<span id="cb1-17"><a href="#cb1-17"></a>accent <span class="ot">&lt;-</span> alien[<span class="dv">2</span>]</span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a>ufo_image <span class="ot">&lt;-</span> magick<span class="sc">::</span><span class="fu">image_read</span>(<span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"images"</span>, <span class="st">"ufo.png"</span>)) </span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Orbitron"</span>, <span class="at">family =</span> <span class="st">"orb"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Barlow"</span>, <span class="at">family =</span> <span class="st">"bar"</span>)</span>
-<span id="cb1-23"><a href="#cb1-23"></a></span>
-<span id="cb1-24"><a href="#cb1-24"></a>sysfonts<span class="sc">::</span><span class="fu">font_add</span>(<span class="at">family =</span> <span class="st">"fa-brands"</span>, <span class="at">regular =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"fonts"</span>, <span class="st">"Font Awesome 6 Brands-Regular-400.otf"</span>))</span>
-<span id="cb1-25"><a href="#cb1-25"></a>sysfonts<span class="sc">::</span><span class="fu">font_add</span>(<span class="at">family =</span> <span class="st">"fa-solid"</span>, <span class="at">regular =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"fonts"</span>, <span class="st">"Font Awesome 6 Free-Solid-900.otf"</span>))</span>
-<span id="cb1-26"><a href="#cb1-26"></a></span>
-<span id="cb1-27"><a href="#cb1-27"></a>showtext<span class="sc">::</span><span class="fu">showtext_auto</span>(<span class="at">enable =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>ufo_sightings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-06-20/ufo_sightings.csv'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>places <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-06-20/places.csv'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>alien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#101319"</span>, <span class="st">"#28ee85"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>bg <span class="ot">&lt;-</span> alien[<span class="dv">1</span>]</span>
+<span id="cb1-18"><a href="#cb1-18"></a>accent <span class="ot">&lt;-</span> alien[<span class="dv">2</span>]</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>ufo_image <span class="ot">&lt;-</span> magick<span class="sc">::</span><span class="fu">image_read</span>(<span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"images"</span>, <span class="st">"ufo.png"</span>)) </span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Orbitron"</span>, <span class="at">family =</span> <span class="st">"orb"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Barlow"</span>, <span class="at">family =</span> <span class="st">"bar"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24"></a></span>
+<span id="cb1-25"><a href="#cb1-25"></a>sysfonts<span class="sc">::</span><span class="fu">font_add</span>(<span class="at">family =</span> <span class="st">"fa-brands"</span>, <span class="at">regular =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"fonts"</span>, <span class="st">"Font Awesome 6 Brands-Regular-400.otf"</span>))</span>
+<span id="cb1-26"><a href="#cb1-26"></a>sysfonts<span class="sc">::</span><span class="fu">font_add</span>(<span class="at">family =</span> <span class="st">"fa-solid"</span>, <span class="at">regular =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"fonts"</span>, <span class="st">"Font Awesome 6 Free-Solid-900.otf"</span>))</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a>showtext<span class="sc">::</span><span class="fu">showtext_auto</span>(<span class="at">enable =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li><p><strong>What is the author defining in lines 15-17? Where else in the code do these defined variables show up? What advantage(s) is there to defining these values here, as variables, rather than defining the values directly throughout the script?</strong></p>
@@ -388,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="12" type="1">
 <li><p><strong>Explain the values provided to the <code>x</code> aesthetic for both text geoms (<code>shape</code> &amp; <code>total_sightings</code>).</strong></p>
 <ul>
-<li></li>
+<li>The values provided in the <code>x</code> asthetic for both text geoms is to show the variables of the shape column and the total sightings number to be shown on the column plot.</li>
 </ul></li>
 </ol>
 </section>
@@ -396,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="ii.-build-plot_us">ii. Build <code>plot_us</code></h3>
 <p><strong>HINT:</strong> Consider temporarily commenting out / rearranging the <code>geom_*()</code> layers to better understand how this plot is constructed</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>plot_us <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(df_us) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>plot_us <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(<span class="at">data =</span> df_us) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> <span class="dv">1</span>, <span class="at">alpha =</span> opacity_val), </span>
 <span id="cb8-3"><a href="#cb8-3"></a>            <span class="at">fill =</span> accent) <span class="sc">+</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.7</span>, <span class="at">label =</span> state), </span>
@@ -426,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="13" type="1">
 <li><p><strong>Consider the order of <code>geom_*()</code> layers in the the above plot (<code>plot_us</code>). Why did the author order the layers in this way?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>In the first geom_rect(), this is making the size of the squares and it is being filled with the opacity values. The following line geom_text() is adding the text into the squares by state along as the type of google font and family. The following line geom_text() is adding the numbers below the state abbreviation, along with the google fonts and family. The author set the layers this way to create a different visualization rather than a plot. The layers had to be set in this format because if they were switched then it would’ve blocked information. Essentially the way the lines are coded matters.</li>
 </ul></li>
 </ol>
 </section>
@@ -448,7 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-13"><a href="#cb9-13"></a>            <span class="at">color =</span> bg, </span>
 <span id="cb9-14"><a href="#cb9-14"></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
 <span id="cb9-15"><a href="#cb9-15"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>  <span class="fu">xlim</span>(<span class="cn">NA</span>, <span class="fl">23.55</span>) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>  <span class="fu">xlim</span>(<span class="cn">NA</span>, <span class="dv">50</span>) <span class="sc">+</span></span>
 <span id="cb9-17"><a href="#cb9-17"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span></span>
 <span id="cb9-18"><a href="#cb9-18"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
 <span id="cb9-19"><a href="#cb9-19"></a>  <span class="fu">theme</span>(</span>
@@ -459,11 +460,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="14" type="1">
 <li><p><strong>This plot includes one-letter labels for each day of the week. How is ths accomplished when week days are written using their three-letter abbreviations (e.g.&nbsp;<code>Mon</code>, <code>Tue</code>) in the <code>df_day_hour</code> data frame?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The labels for each day of the week are being extracted by using str_sub in geom_text, it is only grabbing the first letter instead of the whole word.</li>
 </ul></li>
 <li><p><strong>What role do the <code>ylim()</code> and <code>xlim()</code> functions play in shaping a ggplot, and how do they change the visual layout of this particular plot? To better understand their effect, try rerunning the code with each of these lines commented out and observe how the plot’s spacing and composition change.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>When testing different numbers for ylim, i noticed a difference in the way the inner circle of opacity values would be the ones affected. When xlim is changed the times overlap or the circle is not noticable and looks like a half circle with the timestamps overlapping.</li>
 </ul></li>
 </ol>
 </section>
@@ -522,7 +523,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="16" type="1">
 <li><p><strong>Why do you think the author chose to convert these text elements (and also in <code>plot_ufo</code>, below!) into ggplot objects (you may consider returning to this question after you’ve worked your way through all of the code)?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>I believe the author chose to do an annotation instead of a geom text because some elements might be hanlded or plotted differently. In these plots we just got the sentences in text. Versus the o previous plots we were showned the visual differently without sentences they were just a single text.</li>
 </ul></li>
 </ol>
 </section>
@@ -573,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="17" type="1">
 <li><p><strong>Why does the author render <code>plot.caption</code> using <code>ggtext::element_markdown()</code>, rather than <code>element_text()</code> (like he does for rendering <code>plot.title</code> and <code>text</code>)?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>There are different uses between plot.caption and element_text, in plot.caption it has more leeway and more paramters to be changed. In element_text, we are limited to its properties. Viewing the plot, using plot.caption, has allowed more leeway and changed the visual rather than just using element_text.</li>
 </ul></li>
 </ol>
 </section>
@@ -604,11 +605,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="18" type="1">
 <li><p><strong>Explain how <code>plot_final</code> is assembled. What do you think is the most challenging aspect of arranging all components into a single plot?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>Using the previous plot made, ‘plot_base’, as the name specifies what it is, it will be the main template of how the previous plots created are going to be added. The plot is assembled using inset_element(), to add each plot made, that function has to be used. As well as setting the location of the plots or text.</li>
 </ul></li>
 <li><p><strong>Can you think of one reason the author may have chosen to separate the construction of <code>plot_base</code> and <code>plot_final</code>?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>I think it can be used as other base plots for any other infographic or visual. This will help not making duplicate text and make ciding more efficient.</li>
 </ul></li>
 </ol>
 </section>
@@ -619,32 +620,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="a">
 <li><p><strong>What “perceptual tasks” (from Cleveland &amp; McGill’s heirarchy) must the viewer perform to extract information from these visualizations?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>They emphasized to construct plots based on elementary tasks “as high in the hierchary as possible”. Essentially the perceptual task are to make it as easy as possible to the viewer, make it simple, and easy to understand. A quick glance and they can extract information from it.</li>
 </ul></li>
 <li><p><strong>What task(s) do you think the author wanted to enable or message(s) he wanted to convey with these visualizations (see lecture 2.1, slide 16 for examples)? Be sure to note at least one task / message for each of the three data viz.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The tasks that the author wanted to convey with the visualizations were too reveal a connection and big picture trends, between the 10 commonly sighted shapes, 10k sights population with states in the US, and days out of the week with time stamps when observations were noted.</li>
 </ul></li>
 <li><p><strong>Name at least one caveat to the “hierarchy of perceptual tasks” that the author employed to achieve a goal(s) you noted in question b?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>One caveat the author employed to achieve his goal was the making of the 10k sighting population in the US states. The reason I chose this one was because it reminded me of a periodic table at first, not a visual that is common when representing data. I thought it was pretty cool to create the visual.</li>
 </ul></li>
 </ol></li>
 <li><p><strong>Describe two elements of this piece that you find visually-pleasing / easy to understand / intuitive. Why?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>The two elements would be the bar/ column plot was easy to understand, intuitive, and visually pleasing showing that the lower the bar is the more transparent it gets. Another element that was visually pleasing were the added text using google fonts.</li>
 </ul></li>
 <li><p><strong>Describe two elements of this piece that you feel could be better presented in a different way. Why?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>Two elements that could be better would be to not make it too transparent which makes some of the plots hard to read. The other element would be for the last plot, make the time stamps less cluttered and more apparent as they are also hard to read.</li>
 </ul></li>
 <li><p><strong>Describe two new things that you learned by interpreting / annotating this code. These could be packages, functions, or even code organizational approaches that you hadn’t previously known about or considered.</strong></p>
 <ul>
-<li>Answer here</li>
+<li>I had to search either on here with the <code>?</code> and the function to see what it did or change the code to see what would happen. If the <code>?</code> did not have text or very vague I would try google and see what the differences or what the package or function does.</li>
 </ul></li>
 <li><p><strong>How, if at all, did you use AI tools to help you interpret this code? Describe your approach to using these tools for this assignment. In what ways was consulting the documentation more (or less) helpful than using AI?</strong></p>
 <ul>
-<li>Answer here</li>
+<li>One way that I partially used AI was when I would do google searched, it would give me a table on how functions were different. Other than that I would click the Rstudio package link and it would show something similar to what the <code>?</code> would provide</li>
 </ul></li>
 </ol>
 </section>

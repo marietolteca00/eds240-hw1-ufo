@@ -3,7 +3,7 @@ title: "HW #1"
 subtitle: "Interpreting `{ggplot2}` code"
 description: "Assigned Wed 01/07/2026 | Due Wed 01/14/2026"
 author: "Marie Tolteca"
-date: 1/10/2025
+date: 1/14/2025
 toc: true
 code-line-numbers: true
 editor_options: 
@@ -34,6 +34,7 @@ library(patchwork)
 library(scales) 
 library(showtext) 
 library(tidyverse) 
+library(ggplot2)
 
 ufo_sightings <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-06-20/ufo_sightings.csv')
 places <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-06-20/places.csv')
@@ -133,7 +134,7 @@ df_shape <- ufo_sightings |>
 
 6.  **Describe what this data frame contains.**
 
-    -   In this dataframe we have excluded rows with 'unknown' and 'other' in the shape column. The count line is counting how many times the variable appeared in the shape column. The column 'n' is being renamed into 'total_sightings', it is arranged in a descending order (largest to smallest), sliced at 10, to only see the top 10, and lastly we are creating a shape column that is being facet reordered with shape and total sightings. The other column made is opacity value where it is being rescaled to only include values from 0.3-1. 
+    -   In this dataframe we have excluded rows with 'unknown' and 'other' in the shape column. The count line is counting how many times the variable appeared in the shape column. The column 'n' is being renamed into 'total_sightings', it is arranged in a descending order (largest to smallest), sliced at 10, to only see the top 10, and lastly we are creating a shape column that is being facet reordered with shape and total sightings. The other column made is opacity value where it is being rescaled to only include values from 0.3-1.
 
 7.  **What does `fct_reorder` do when it is applied to the `shape` variable? What would have happened if this step was not performed?**
 
@@ -251,18 +252,16 @@ plot_shape <- ggplot(data = df_shape) +
 12. **Explain the values provided to the `x` aesthetic for both text geoms (`shape` & `total_sightings`).**
 
     -   The values provided in the `x` asthetic for both text geoms is to show the variables of the shape column and the total sightings number to be shown on the column plot.
-    
-    
 
 ### ii. Build `plot_us`
 
 **HINT:** Consider temporarily commenting out / rearranging the `geom_*()` layers to better understand how this plot is constructed
 
 ```{r}
-#| eval: true
+#| eval: false
 #| echo: true
 
-plot_us <-  ggplot(df_us) +
+plot_us <-  ggplot(data = df_us) +
   geom_rect(aes(xmin = 0, xmax = 1, ymin = 0, ymax = 1, alpha = opacity_val), 
             fill = accent) +
   geom_text(aes(x = 0.5, y = 0.7, label = state), 
@@ -330,7 +329,7 @@ plot_day <- ggplot(data = df_day_hour) +
 
 15. **What role do the `ylim()` and `xlim()` functions play in shaping a ggplot, and how do they change the visual layout of this particular plot? To better understand their effect, try rerunning the code with each of these lines commented out and observe how the plot’s spacing and composition change.**
 
-    -  When testing different numbers for ylim, i noticed a difference in the way the inner circle of opacity values would be the ones affected. When xlim is changed the times overlap or the circle is not noticable and looks like a half circle with the timestamps overlapping.
+    -   When testing different numbers for ylim, i noticed a difference in the way the inner circle of opacity values would be the ones affected. When xlim is changed the times overlap or the circle is not noticable and looks like a half circle with the timestamps overlapping.
 
 ### iv. Build `quote*`s
 
@@ -477,7 +476,7 @@ ggsave(plot = plot_final,
 
 18. **Explain how `plot_final` is assembled. What do you think is the most challenging aspect of arranging all components into a single plot?**
 
-    -  Using the previous plot made, 'plot_base', as the name specifies what it is, it will be the main template of how the previous plots created are going to be added. The plot is assembled using inset_element(), to add each plot made, that function has to be used. As well as setting the location of the plots or text.
+    -   Using the previous plot made, 'plot_base', as the name specifies what it is, it will be the main template of how the previous plots created are going to be added. The plot is assembled using inset_element(), to add each plot made, that function has to be used. As well as setting the location of the plots or text.
 
 19. **Can you think of one reason the author may have chosen to separate the construction of `plot_base` and `plot_final`?**
 
@@ -489,11 +488,11 @@ ggsave(plot = plot_final,
 
     a.  **What "perceptual tasks" (from Cleveland & McGill's heirarchy) must the viewer perform to extract information from these visualizations?**
 
-        - They emphasized to construct plots based on elementary tasks "as high in the hierchary as possible". Essentially the perceptual task are to make it as easy as possible to the viewer, make it simple, and easy to understand. A quick glance and they can extract information from it.
+        -   They emphasized to construct plots based on elementary tasks "as high in the hierchary as possible". Essentially the perceptual task are to make it as easy as possible to the viewer, make it simple, and easy to understand. A quick glance and they can extract information from it.
 
     b.  **What task(s) do you think the author wanted to enable or message(s) he wanted to convey with these visualizations (see lecture 2.1, slide 16 for examples)? Be sure to note at least one task / message for each of the three data viz.**
 
-        - The tasks that the author wanted to convey with the visualizations were too reveal a connection and big picture trends,  between the 10 commonly sighted shapes, 10k sights population with states in the US, and days out of the week with time stamps when observations were noted.
+        -   The tasks that the author wanted to convey with the visualizations were too reveal a connection and big picture trends, between the 10 commonly sighted shapes, 10k sights population with states in the US, and days out of the week with time stamps when observations were noted.
 
     c.  **Name at least one caveat to the "hierarchy of perceptual tasks" that the author employed to achieve a goal(s) you noted in question b?**
 
