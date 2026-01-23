@@ -3,7 +3,7 @@ title: "HW #1"
 subtitle: "Interpreting `{ggplot2}` code"
 description: "Assigned Wed 01/07/2026 | Due Wed 01/14/2026"
 author: "Marie Tolteca"
-date: 1/14/2025
+date: 1/22/2025
 toc: true
 code-line-numbers: true
 editor_options: 
@@ -91,6 +91,7 @@ df_pop <- places |>
 #| eval: false
 #| echo: true
 
+
 df_us <- ufo_sightings |>
   filter(country_code == "US") |>
   mutate(state = str_replace(string = state,
@@ -107,11 +108,11 @@ df_us <- ufo_sightings |>
 
 4.  **Describe what this data frame contains.**
 
-    -   Here we are using the ufo_sighting dataframe, it has been filtered to only grab the areas in country code column. A new column was made, called state and same code was applied as before to have consistency in all uppercase.
+    -   Here we are using the ufo_sighting dataframe, it has been filtered to only grab the areas in country code column. A new column was made, called state and same code was applied as before to have consistency in all uppercase. Sightings are grouped by state, producing one row per state with the total number of observations. This is joined with population data, allowing calculation of num_obs_per10k, which represents the number of UFO sightings per 10,000 residents in each state.
 
 5.  **What does `opacity_val` represent, and why is it calculated?**
 
-    -   The `opacity_val` is calculating a percentage number of obeservations and population.
+    -   The `opacity_val` represents a normalized measure of UFO sightings per capita, scaled between 0 and 1 by dividing each state’s num_obs_per10k by the maximum value across states. This variable is used for visualization purposes, allowing states with higher per-capita sightings to appear more visually prominent.
 
 ### iii. Create `df_shape`
 
@@ -143,7 +144,8 @@ df_shape <- ufo_sightings |>
 
 8.  **What is the purpose of rescaling `opacity_val`? And why rescale from 0.3 to 1?**
 
-    -   The purpose of rescaling is to have an opacity values from 0.3-1 instead of having outliers it will keep the information close.
+    -   Rescaling opacity from 0.3 to 1 ensures that all states remain visible in the visualization while preserving relative differences in UFO sightings per capita. Setting a minimum opacity of 0.3 prevents low-value states from becoming invisible, while the maximum opacity of 1 highlights states with the highest per-capita sightings.
+
 
 ### iv. Create `df_day_hour`
 
@@ -188,7 +190,7 @@ df_day_hour1 <- ufo_sightings |>
 
 10. **What is the purpose of the last line inside the `case_when()` statement (`TRUE ~ paste0(hour - 12, "pm")`)?**
 
-    -   The purpose of the last line is to get the time past midnight, instead of getting negative numbers it changes into AM time stamps.
+    -   The last line of case_when is a condition that formats all remaining hours as PM times by converting from 24-hour to 12-hour time. It ensures that any hour not explicitly labeled as AM or noon is displayed as a PM value.
 
 ## III. Prepare text elements
 
@@ -391,7 +393,7 @@ quote3 <- ggplot() +
 
 16. **Why do you think the author chose to convert these text elements (and also in `plot_ufo`, below!) into ggplot objects (you may consider returning to this question after you've worked your way through all of the code)?**
 
-    -   I believe the author chose to do an annotation instead of a geom text because some elements might be hanlded or plotted differently. In these plots we just got the sentences in text. Versus the o previous plots we were showned the visual differently without sentences they were just a single text.
+    -   Turning the quotes into ggplot objects allows them to be composed and aligned with other plots using ggplot based layout tools, making figure assembly more consistent and flexible.
 
 ### v. Build `plot_ufo`
 
@@ -446,7 +448,7 @@ plot_base <- ggplot() +
 
 17. **Why does the author render `plot.caption` using `ggtext::element_markdown()`, rather than `element_text()` (like he does for rendering `plot.title` and `text`)?**
 
-    -   There are different uses between plot.caption and element_text, in plot.caption it has more leeway and more paramters to be changed. In element_text, we are limited to its properties. Viewing the plot, using plot.caption, has allowed more leeway and changed the visual rather than just using element_text.
+    -   The author uses `ggtext::element_markdown()` for the plot caption because it supports Markdown based rich text formatting, such as italics, color changes, and hyperlinks within the caption. In contrast, `element_text()` applies a single style and cannot render inline formatting, making it less flexible for captions that include credits or styled text.
 
 ## V. Assemble & save
 
@@ -489,7 +491,7 @@ ggsave(plot = plot_final,
 
     a.  **What "perceptual tasks" (from Cleveland & McGill's heirarchy) must the viewer perform to extract information from these visualizations?**
 
-        -   They emphasized to construct plots based on elementary tasks "as high in the hierchary as possible". Essentially the perceptual task are to make it as easy as possible to the viewer, make it simple, and easy to understand. A quick glance and they can extract information from it.
+        -   They emphasized to construct plots based on elementary tasks "as high in the hierchary as possible". Essentially the perceptual task are to make it as easy as possible to the viewer, make it simple and easy to understand. A quick glance and they can extract information from it. Using position along a common scale for comparing counts or observations across states. As well as, Position along identical but non-aligned scales such as comparing or interpreting multiple panels. Color is also another way to show information on visualizations like the `opacity_val` that was used by the author.
 
     b.  **What task(s) do you think the author wanted to enable or message(s) he wanted to convey with these visualizations (see lecture 2.1, slide 16 for examples)? Be sure to note at least one task / message for each of the three data viz.**
 
@@ -510,6 +512,7 @@ ggsave(plot = plot_final,
 23. **Describe two new things that you learned by interpreting / annotating this code. These could be packages, functions, or even code organizational approaches that you hadn't previously known about or considered.**
 
     -   I had to search either on here with the `?` and the function to see what it did or change the code to see what would happen. If the `?` did not have text or very vague I would try google and see what the differences or what the package or function does.
+    - The difference between `ggtext::element_markdown()`, rather than `element_text()`. As well as making a plot_base() and adding inset_elements to add different plots made before to create an infographic.  
 
 24. **How, if at all, did you use AI tools to help you interpret this code? Describe your approach to using these tools for this assignment. In what ways was consulting the documentation more (or less) helpful than using AI?**
 
